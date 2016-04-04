@@ -14,11 +14,13 @@ namespace PrizeDrawDan
 	{
 		SpriteBatch spriteBatch;
 		PrizeDrawContext ctx;
+		SplitScreen splitscreen;
 
 		public Game1 ()
 		{
 			ctx = new PrizeDrawContext (new GraphicsDeviceManager (this));
 			Content.RootDirectory = "Content";
+			splitscreen = new SplitScreen ();
 		}
 
 		/// <summary>
@@ -45,6 +47,7 @@ namespace PrizeDrawDan
 			spriteBatch = new SpriteBatch (GraphicsDevice);
 
 			//TODO: use this.Content to load your game content here 
+			splitscreen.LoadContent(ctx);
 		}
 
 		/// <summary>
@@ -75,6 +78,14 @@ namespace PrizeDrawDan
 			ctx.graphics.GraphicsDevice.Clear (Color.CornflowerBlue);
             
 			//TODO: Add your drawing code here
+			ctx.graphics.GraphicsDevice.Viewport = splitscreen.Game();
+			spriteBatch.Begin ();
+			spriteBatch.Draw (Color.Black);
+			spriteBatch.End ();
+
+
+
+
             
 			base.Draw (gameTime);
 		}
