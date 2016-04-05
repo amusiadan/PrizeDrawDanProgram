@@ -71,6 +71,7 @@
     <Compile Include="SplitScreen.cs" />
     <Compile Include="BackgroundGame.cs" />
     <Compile Include="UiButtons.cs" />
+    <Compile Include="MainMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -89,6 +90,9 @@
     </Content>
     <Content Include="Content\bin\MacOSX\Button1.xnb">
       <Link>Content\Button1.xnb</Link>
+    </Content>
+    <Content Include="Content\bin\MacOSX\Button2.xnb">
+      <Link>Content\Button2.xnb</Link>
     </Content>
   </ItemGroup>
 </Project>

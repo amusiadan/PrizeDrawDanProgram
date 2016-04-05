@@ -17,7 +17,7 @@ namespace PrizeDrawDan
 		PrizeDrawContext ctx;
 		SplitScreen splitscreen;
 		BackgroundGame background;
-		UiButtons userButtons;
+		MainMenu main;
 
 
 		public Game1 ()
@@ -26,6 +26,7 @@ namespace PrizeDrawDan
 			Content.RootDirectory = "Content";
 			splitscreen = new SplitScreen ();
 			background = new BackgroundGame ();
+			main = new MainMenu ();
 
 		}
 
@@ -58,8 +59,7 @@ namespace PrizeDrawDan
 			//TODO: use this.Content to load your game content here 
 			splitscreen.LoadContent (ctx);
 			background.LoadContent (GraphicsDevice, Content);
-			userButtons = new UiButtons ("Button1");
-			userButtons.LoadContent (Content);
+			main.LoadContent (Content);
 		}
 
 		/// <summary>
@@ -77,6 +77,8 @@ namespace PrizeDrawDan
 			#endif
             
 			// TODO: Add your update logic here
+
+
             
 			base.Update (gameTime);
 		}
@@ -97,7 +99,7 @@ namespace PrizeDrawDan
 
 			ctx.graphics.GraphicsDevice.Viewport = splitscreen.Ui ();
 			spriteBatch.Begin ();
-			userButtons.Draw (spriteBatch);
+			main.Draw (spriteBatch); 
 			spriteBatch.End ();
 
 
