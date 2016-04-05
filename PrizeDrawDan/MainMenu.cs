@@ -15,8 +15,9 @@ namespace PrizeDrawDan
 
 		public MainMenu()
 		{
-			main.Add(new UiButtons("Button1"));
-			main.Add(new UiButtons("Button2"));
+			main.Add (new UiButtons ("Button1"));
+			main.Add (new UiButtons ("Button2"));
+			main.Add (new UiButtons ("Button3"));
 		}
 
  
@@ -28,6 +29,7 @@ namespace PrizeDrawDan
 			}
 			main.Find (x => x.AssetName == "Button1").MoveButton (0, -200);
 			main.Find (x => x.AssetName == "Button2").MoveButton (0, 0);
+			main.Find (x => x.AssetName == "Button2").MoveButton (0, 200);
 		}
 			
 
@@ -41,13 +43,17 @@ namespace PrizeDrawDan
 			foreach (UiButtons element in main) {
 				element.Draw(spriteBatch);
 			}
+
 		}
 
 		public void OnClick(string element){
 			if (element == "Button1") {
 				//something happens
-			} 
-			else if (element == "Button2") {
+			}
+			if (element == "Button2") {
+				//something else happens
+			}
+			if (element == "Button3") {
 				//something else happens
 			}
 		}

@@ -14,7 +14,7 @@ namespace PrizeDrawDan
 		Rectangle buttonRectangle;
 		string assetName;
 
-		public delegate void ButtonClicked(string button);
+		public delegate void ButtonClicked(string element);
 
 		public event ButtonClicked clickEvent;
 
@@ -54,7 +54,5 @@ namespace PrizeDrawDan
 			buttonRectangle = new Rectangle (buttonRectangle.X += x, buttonRectangle.Y += y, 
 				buttonRectangle.Width, buttonRectangle.Height);
 		}
-
-
 	}
 }

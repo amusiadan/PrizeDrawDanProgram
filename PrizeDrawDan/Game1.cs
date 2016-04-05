@@ -78,7 +78,9 @@ namespace PrizeDrawDan
             
 			// TODO: Add your update logic here
 
+			main.Update ();
 
+			MouseState mouseState = Mouse.GetState();
             
 			base.Update (gameTime);
 		}

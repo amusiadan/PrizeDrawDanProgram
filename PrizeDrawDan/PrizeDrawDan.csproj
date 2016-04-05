@@ -94,5 +94,8 @@
     <Content Include="Content\bin\MacOSX\Button2.xnb">
       <Link>Content\Button2.xnb</Link>
     </Content>
+    <Content Include="Content\bin\MacOSX\Button3.xnb">
+      <Link>Content\Button3.xnb</Link>
+    </Content>
   </ItemGroup>
 </Project>
