@@ -10,19 +10,27 @@ namespace PrizeDrawDan
 {
 	public class BackgroundGame
 	{
-		SpriteBatch spriteBatch;
 		Texture2D backgroundImage;
 		Vector2 position;
+		string backgroundName;
 
+		public BackgroundGame(string backgroundImage){
+			this.backgroundName = backgroundImage;
+		}
 
-		public void LoadContent(GraphicsDevice graphicsDevice, ContentManager content){
-			
-			spriteBatch = new SpriteBatch (graphicsDevice);
-			backgroundImage = content.Load<Texture2D>("back");
+		public string BackgroundImage{
+			get {
+				return backgroundName;
+			}
+			set { backgroundName = value; }
+		}
+
+		public void LoadContent(ContentManager content){
+			backgroundImage = content.Load<Texture2D>(backgroundName);
 			position = new Vector2 (0, 0);
 		}
 
-		public void Draw(GraphicsDevice GraphicsDevice){
+		public void Draw(SpriteBatch spriteBatch){
 			spriteBatch.Begin ();
 			spriteBatch.Draw (backgroundImage, position);
 			spriteBatch.End ();

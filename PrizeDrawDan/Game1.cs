@@ -16,8 +16,8 @@ namespace PrizeDrawDan
 		SpriteBatch spriteBatch;
 		PrizeDrawContext ctx;
 		SplitScreen splitscreen;
-		BackgroundGame background;
 		MainMenu main;
+		BackgroundContent background;
 
 
 		public Game1 ()
@@ -25,8 +25,8 @@ namespace PrizeDrawDan
 			ctx = new PrizeDrawContext (new GraphicsDeviceManager (this));
 			Content.RootDirectory = "Content";
 			splitscreen = new SplitScreen ();
-			background = new BackgroundGame ();
 			main = new MainMenu ();
+			background = new BackgroundContent ();
 
 		}
 
@@ -58,7 +58,7 @@ namespace PrizeDrawDan
 
 			//TODO: use this.Content to load your game content here 
 			splitscreen.LoadContent (ctx);
-			background.LoadContent (GraphicsDevice, Content);
+			background.LoadContent (Content);
 			main.LoadContent (Content);
 		}
 
@@ -79,8 +79,6 @@ namespace PrizeDrawDan
 			// TODO: Add your update logic here
 
 			main.Update ();
-
-			MouseState mouseState = Mouse.GetState();
             
 			base.Update (gameTime);
 		}
@@ -96,7 +94,7 @@ namespace PrizeDrawDan
 
 			//TODO: Add your drawing code here
 			ctx.graphics.GraphicsDevice.Viewport = splitscreen.Game();
-			background.Draw (GraphicsDevice);
+			background.Draw (spriteBatch);
 
 
 			ctx.graphics.GraphicsDevice.Viewport = splitscreen.Ui ();
