@@ -38,6 +38,9 @@ namespace PrizeDrawDan
 			// TODO: Add your initialization logic here
 			ctx.Initialize();
 
+
+			this.IsMouseVisible = true;
+
 			base.Initialize ();
 		}
 
@@ -81,7 +84,7 @@ namespace PrizeDrawDan
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw (GameTime gameTime)
 		{
-			ctx.graphics.GraphicsDevice.Clear (Color.CornflowerBlue);
+			ctx.graphics.GraphicsDevice.Clear (Color.Black);
             
 
 			//TODO: Add your drawing code here

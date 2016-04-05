@@ -18,7 +18,7 @@ namespace PrizeDrawDan
 		public void Initialize (){
 		
 			graphics.PreferredBackBufferHeight = 720;
-			graphics.PreferredBackBufferWidth = 1080;
+			graphics.PreferredBackBufferWidth = 2160;
 			graphics.IsFullScreen = false;
 			graphics.ApplyChanges();
 		}
