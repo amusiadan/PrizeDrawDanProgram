@@ -70,6 +70,7 @@
     <Compile Include="PrizeDrawContext.cs" />
     <Compile Include="SplitScreen.cs" />
     <Compile Include="BackgroundGame.cs" />
+    <Compile Include="UiButtons.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -85,6 +86,9 @@
   <ItemGroup>
     <Content Include="Content\bin\MacOSX\back.xnb">
       <Link>Content\back.xnb</Link>
+    </Content>
+    <Content Include="Content\bin\MacOSX\Button1.xnb">
+      <Link>Content\Button1.xnb</Link>
     </Content>
   </ItemGroup>
 </Project>

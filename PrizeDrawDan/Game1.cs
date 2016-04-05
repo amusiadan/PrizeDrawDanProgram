@@ -13,11 +13,12 @@ namespace PrizeDrawDan
 	/// </summary>
 	public class Game1 : Game
 	{
-		//SpriteBatch spriteBatch;
-		//Texture2D background;
+		SpriteBatch spriteBatch;
 		PrizeDrawContext ctx;
 		SplitScreen splitscreen;
 		BackgroundGame background;
+		UiButtons userButtons;
+
 
 		public Game1 ()
 		{
@@ -25,6 +26,7 @@ namespace PrizeDrawDan
 			Content.RootDirectory = "Content";
 			splitscreen = new SplitScreen ();
 			background = new BackgroundGame ();
+
 		}
 
 		/// <summary>
@@ -51,12 +53,13 @@ namespace PrizeDrawDan
 		protected override void LoadContent ()
 		{
 			// Create a new SpriteBatch, which can be used to draw textures.
-			//spriteBatch = new SpriteBatch (GraphicsDevice);
-			//background = Content.Load<Texture2D>("back");
+			spriteBatch = new SpriteBatch(GraphicsDevice);
 
 			//TODO: use this.Content to load your game content here 
 			splitscreen.LoadContent (ctx);
 			background.LoadContent (GraphicsDevice, Content);
+			userButtons = new UiButtons ("Button1");
+			userButtons.LoadContent (Content);
 		}
 
 		/// <summary>
@@ -92,6 +95,10 @@ namespace PrizeDrawDan
 			background.Draw (GraphicsDevice);
 
 
+			ctx.graphics.GraphicsDevice.Viewport = splitscreen.Ui ();
+			spriteBatch.Begin ();
+			userButtons.Draw (spriteBatch);
+			spriteBatch.End ();
 
 
 
