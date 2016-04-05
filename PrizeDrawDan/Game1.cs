@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Content;
 
 namespace PrizeDrawDan
 {
@@ -12,15 +13,18 @@ namespace PrizeDrawDan
 	/// </summary>
 	public class Game1 : Game
 	{
-		SpriteBatch spriteBatch;
+		//SpriteBatch spriteBatch;
+		//Texture2D background;
 		PrizeDrawContext ctx;
 		SplitScreen splitscreen;
+		BackgroundGame background;
 
 		public Game1 ()
 		{
 			ctx = new PrizeDrawContext (new GraphicsDeviceManager (this));
 			Content.RootDirectory = "Content";
 			splitscreen = new SplitScreen ();
+			background = new BackgroundGame ();
 		}
 
 		/// <summary>
@@ -44,10 +48,12 @@ namespace PrizeDrawDan
 		protected override void LoadContent ()
 		{
 			// Create a new SpriteBatch, which can be used to draw textures.
-			spriteBatch = new SpriteBatch (GraphicsDevice);
+			//spriteBatch = new SpriteBatch (GraphicsDevice);
+			//background = Content.Load<Texture2D>("back");
 
 			//TODO: use this.Content to load your game content here 
-			splitscreen.LoadContent(ctx);
+			splitscreen.LoadContent (ctx);
+			background.LoadContent (GraphicsDevice, Content);
 		}
 
 		/// <summary>
@@ -77,11 +83,11 @@ namespace PrizeDrawDan
 		{
 			ctx.graphics.GraphicsDevice.Clear (Color.CornflowerBlue);
             
+
 			//TODO: Add your drawing code here
 			ctx.graphics.GraphicsDevice.Viewport = splitscreen.Game();
-			spriteBatch.Begin ();
-			spriteBatch.Draw (Color.Black);
-			spriteBatch.End ();
+			background.Draw (GraphicsDevice);
+
 
 
 
