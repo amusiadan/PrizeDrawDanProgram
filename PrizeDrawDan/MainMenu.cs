@@ -15,9 +15,9 @@ namespace PrizeDrawDan
 
 		public MainMenu()
 		{
-			main.Add (new UiButtons ("Button1"));
-			main.Add (new UiButtons ("Button2"));
-			main.Add (new UiButtons ("Button3"));
+			main.Add (new UiButtons ("Button1", "Button"));
+			main.Add (new UiButtons ("Button2", "Button"));
+			main.Add (new UiButtons ("Button3", "Button"));
 		}
 
  
@@ -27,15 +27,15 @@ namespace PrizeDrawDan
 				element.CenterButton (1080, 720);
 				element.clickEvent += OnClick;
 			}
-			main.Find (x => x.AssetName == "Button1").MoveButton (0, -200);
-			main.Find (x => x.AssetName == "Button2").MoveButton (0, 0);
-			main.Find (x => x.AssetName == "Button2").MoveButton (0, 200);
+			main.Find (x => x.Id == "Button1").MoveButton (0, -200);
+			main.Find (x => x.Id == "Button2").MoveButton (0, 0);
+			main.Find (x => x.Id == "Button3").MoveButton (0, 200);
 		}
 			
 
 		public void Update(){
 			foreach (UiButtons elemnent in main) {
-				elemnent.Update ();
+				//elemnent.Update ();
 			}
 		}
 
@@ -48,7 +48,6 @@ namespace PrizeDrawDan
 
 		public void OnClick(string element){
 			if (element == "Button1") {
-				//something happens
 			}
 			if (element == "Button2") {
 				//something else happens

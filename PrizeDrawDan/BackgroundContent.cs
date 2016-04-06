@@ -15,7 +15,8 @@ namespace PrizeDrawDan
 
 		public BackgroundContent ()
 		{
-			main.Add (new BackgroundGame ("Background1"));
+			main.Add (new BackgroundGame ("Background1", "Background1"));
+			main.Add (new BackgroundGame ("Background2", "Background2"));
 		}
 
 		public void LoadContent (ContentManager content){		
@@ -32,10 +33,12 @@ namespace PrizeDrawDan
 
 		public void Draw(SpriteBatch spriteBatch){
 			foreach (BackgroundGame element in main) {
-				element.Draw(spriteBatch);
+				main.Find (x => x.Id == "Background1").Draw (spriteBatch);
+				main.Find (x => x.Id == "Background2").Draw (spriteBatch);
+				//element.Draw(spriteBatch);
 			}
 
-		}
+		} 
 			
 	}
 }

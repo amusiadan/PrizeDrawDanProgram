@@ -13,9 +13,11 @@ namespace PrizeDrawDan
 		Texture2D backgroundImage;
 		Vector2 position;
 		string backgroundName;
+		string id;
 
-		public BackgroundGame(string backgroundImage){
+		public BackgroundGame(string backgroundImage, string id){
 			this.backgroundName = backgroundImage;
+			this.id = id;
 		}
 
 		public string BackgroundImage{
@@ -25,15 +27,20 @@ namespace PrizeDrawDan
 			set { backgroundName = value; }
 		}
 
+		public string Id {
+			get {
+				return id;
+			}
+			set { id = value; }
+		}
+
 		public void LoadContent(ContentManager content){
 			backgroundImage = content.Load<Texture2D>(backgroundName);
 			position = new Vector2 (0, 0);
 		}
 
 		public void Draw(SpriteBatch spriteBatch){
-			spriteBatch.Begin ();
 			spriteBatch.Draw (backgroundImage, position);
-			spriteBatch.End ();
 		}
 	}
 
