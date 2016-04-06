@@ -9,37 +9,44 @@ using System.Collections.Generic;
 
 namespace PrizeDrawDan
 {
-	public class BackgroundContent
+	class BackgroundContent
 	{
-		List<BackgroundGame> main = new List<BackgroundGame> ();
+		//Background Texture Types
+		Texture2D backgroundImage;
+		Texture2D window;
+		Texture2D banner;
 
-		public BackgroundContent ()
+		string currentBackground;
+		SpriteBatch batch;
+		GraphicsDevice device;
+		GameState game;
+	
+
+		internal BackgroundContent(GameState theGame)
 		{
-			main.Add (new BackgroundGame ("Background1", "Background1"));
-			main.Add (new BackgroundGame ("Background2", "Background2"));
+			game = theGame;
 		}
 
-		public void LoadContent (ContentManager content){		
-			foreach (BackgroundGame element in main) {
-				element.LoadContent (content);
-			}
+		internal void LoadContent(GraphicsDevice graphicsDevice, ContentManager Content)
+		{
+			batch = new SpriteBatch (graphicsDevice);
+			device = graphicsDevice;
 		}
 
-		/*public void Update(){
-			foreach (BackgroundGame element in main) {
-				element.Update ();
-			}
-		}*/
+		internal void Update(GameTime gameTime)
+		{
+			bool loadDefault = false;
+		}
 
-		public void Draw(SpriteBatch spriteBatch){
-			foreach (BackgroundGame element in main) {
-				main.Find (x => x.Id == "Background1").Draw (spriteBatch);
-				main.Find (x => x.Id == "Background2").Draw (spriteBatch);
-				//element.Draw(spriteBatch);
-			}
+		internal void Draw(GraphicsDevice graphicsDevice)
+		{
+			graphicsDevice.Clear(Color.Black);
 
-		} 
-			
+			if (backgroundImage != null) {
+				batch.Begin ();
+				batch.Draw (backgroundImage, new Vector2 (0, 0), Color.White);	
+				batch.End ();
+			}
+		}
 	}
 }
-

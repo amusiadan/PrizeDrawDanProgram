@@ -25,38 +25,17 @@ namespace PrizeDrawDan
 			foreach (UiButtons element in main) {
 				element.LoadContent (content);
 				element.CenterButton (1080, 720);
-				element.clickEvent += OnClick;
 			}
-			main.Find (x => x.Id == "Button1").MoveButton (0, -200);
-			main.Find (x => x.Id == "Button2").MoveButton (0, 0);
-			main.Find (x => x.Id == "Button3").MoveButton (0, 200);
-		}
-			
-
-		public void Update(){
-			foreach (UiButtons elemnent in main) {
-				//elemnent.Update ();
-			}
+			main.Find (x => x.Id == "Button1").MoveButton (450, -150);
+			main.Find (x => x.Id == "Button2").MoveButton (450, 0);
+			main.Find (x => x.Id == "Button3").MoveButton (450, 150);
 		}
 
 		public void Draw(SpriteBatch spriteBatch){
 			foreach (UiButtons element in main) {
 				element.Draw(spriteBatch);
 			}
-
-		}
-
-		public void OnClick(string element){
-			if (element == "Button1") {
-			}
-			if (element == "Button2") {
-				//something else happens
-			}
-			if (element == "Button3") {
-				//something else happens
-			}
 		}
 	}
-
 }
 

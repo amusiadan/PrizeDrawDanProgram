@@ -10,6 +10,9 @@ namespace PrizeDrawDan
 	public class PrizeDrawContext
 	{
 		public GraphicsDeviceManager graphics;
+		public GameState gameState = GameState.Back1;
+
+
 
 		public PrizeDrawContext(GraphicsDeviceManager graphics){
 			this.graphics = graphics;

@@ -74,6 +74,7 @@
     <Compile Include="UiButtons.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="BackgroundContent.cs" />
+    <Compile Include="GameState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -101,6 +102,9 @@
     </Content>
     <Content Include="Content\bin\MacOSX\Button.xnb">
       <Link>Content\Button.xnb</Link>
+    </Content>
+    <Content Include="Content\bin\MacOSX\BackgroundOverlay.xnb">
+      <Link>Content\BackgroundOverlay.xnb</Link>
     </Content>
   </ItemGroup>
 </Project>

@@ -18,18 +18,15 @@ namespace PrizeDrawDan
 		SplitScreen splitscreen;
 		MainMenu main;
 		//BackgroundContent background;
-		UiButtons btn1;
-		UiButtons btn2;
-		UiButtons btn3;
 
-		enum GameState
-		{
-			Game1,
-			Game2,
-			Game3,
-		}
+		//Background stuff
+		Rectangle backRectangle;
+		Texture2D back1;
+		Texture2D back2;
+		Color colour;
 
-		GameState CurrentGameState = GameState.Game1;
+		//Mouse Stuff
+		private MouseState oldState;
 
 
 		public Game1 ()
@@ -39,6 +36,8 @@ namespace PrizeDrawDan
 			splitscreen = new SplitScreen ();
 			main = new MainMenu ();
 			//background = new BackgroundContent ();
+			colour = new Color(255, 255, 255, 255);
+			this.IsMouseVisible = true;
 
 		}
 
@@ -53,12 +52,8 @@ namespace PrizeDrawDan
 			// TODO: Add your initialization logic here
 			ctx.Initialize();
 
-
-			this.IsMouseVisible = true;
-
 			base.Initialize ();
 		}
-
 		/// <summary>
 		/// LoadContent will be called once per game and is the place to load
 		/// all of your content.
@@ -67,15 +62,15 @@ namespace PrizeDrawDan
 		{
 			// Create a new SpriteBatch, which can be used to draw textures.
 			spriteBatch = new SpriteBatch(GraphicsDevice);
-
 			//TODO: use this.Content to load your game content here 
 			splitscreen.LoadContent (ctx);
 			//background.LoadContent (Content);
 			main.LoadContent (Content);
 
-			btn1 = new UiButtons ("Button1", "Button");
-			btn2 = new UiButtons ("Button2", "Button");
-			btn3 = new UiButtons ("Button3", "Button");
+			back1 = Content.Load<Texture2D> ("Background1");
+			back2 = Content.Load<Texture2D> ("Background2");
+
+
 		}
 
 		/// <summary>
@@ -91,32 +86,19 @@ namespace PrizeDrawDan
 			if (GamePad.GetState (PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState ().IsKeyDown (Keys.Escape))
 				Exit ();
 			#endif
-
-			MouseState mouse = Mouse.GetState ();
-
-			switch (CurrentGameState) {
-			case GameState.Game1:
-				if (btn1.isClicked == true)
-					CurrentGameState = GameState.Game1;
-				btn1.Update (mouse);
-				break;
-
-			case GameState.Game2:
-				if (btn2.isClicked == true)
-					CurrentGameState = GameState.Game2;
-				btn2.Update (mouse);
-				break;
-
-			case GameState.Game3:
-				if (btn3.isClicked == true)
-					CurrentGameState = GameState.Game3;
-				btn3.Update (mouse);
-				break;
-				
-			}
 			// TODO: Add your update logic here
-
-			main.Update ();
+			MouseState newState = Mouse.GetState();
+			if(newState.LeftButton == ButtonState.Pressed && oldState.LeftButton == ButtonState.Released)
+			{
+				if (ctx.gameState == GameState.Back1) 
+				{
+					ctx.gameState = GameState.Back2;
+				} else 
+				{
+					ctx.gameState = GameState.Back1;
+				}
+			}
+			oldState = newState;
             
 			base.Update (gameTime);
 		}
@@ -127,38 +109,34 @@ namespace PrizeDrawDan
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw (GameTime gameTime)
 		{
+			backRectangle = new Rectangle (0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
 			ctx.graphics.GraphicsDevice.Clear (Color.Black);
             
 
 			//TODO: Add your drawing code here
+
+			//Draw to the Game Window Side (Left)
 			ctx.graphics.GraphicsDevice.Viewport = splitscreen.Game();
 			spriteBatch.Begin ();
-			switch (CurrentGameState) {
-			case GameState.Game1:
-				spriteBatch.Draw (Content.Load<Texture2D> ("Background1"), new Rectangle 
-					(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
+			switch (ctx.gameState){
+			case GameState.Back1:
+				spriteBatch.Draw (back1, backRectangle, colour);
+				break;
+			case GameState.Back2:
+				spriteBatch.Draw (back2, backRectangle, colour);
 				break;
 
-			case GameState.Game2:
-				spriteBatch.Draw (Content.Load<Texture2D> ("Background2"), new Rectangle 
-					(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
-				break;
-
-			case GameState.Game3:
-
-				break;
 			}
 			spriteBatch.End ();
 
 
+			//Draw to the User Interface Side (Right)
 			ctx.graphics.GraphicsDevice.Viewport = splitscreen.Ui ();
 			spriteBatch.Begin ();
 			main.Draw (spriteBatch); 
 			spriteBatch.End ();
 
 
-
-            
 			base.Draw (gameTime);
 		}
 	}
