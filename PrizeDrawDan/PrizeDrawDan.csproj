@@ -116,5 +116,8 @@
     <Content Include="Content\bin\MacOSX\Mouse Pointer.xnb">
       <Link>Content\Mouse Pointer.xnb</Link>
     </Content>
+    <Content Include="Content\bin\MacOSX\Timer Font.xnb">
+      <Link>Content\Timer Font.xnb</Link>
+    </Content>
   </ItemGroup>
 </Project>
