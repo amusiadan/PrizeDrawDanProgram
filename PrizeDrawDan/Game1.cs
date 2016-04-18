@@ -16,14 +16,14 @@ namespace PrizeDrawDan
 		SpriteBatch spriteBatch;
 		PrizeDrawContext ctx;
 		SplitScreen splitscreen;
-		MainMenu main;
+		MainMenu mainMenu;
 
-//		//Button Test
-//		Rectangle buttonRectangle;
-//		Texture2D buttonDefault;
-//		Texture2D buttonHover;
-//		Texture2D buttonTexture;
-//		//Texture2D buttonHClicked;
+		//Button Test
+		Rectangle buttonRectangle;
+		Texture2D buttonDefault;
+		Texture2D buttonHover;
+		Texture2D buttonTexture;
+		Texture2D buttonClicked;
 
 
 		//Background stuff
@@ -34,17 +34,23 @@ namespace PrizeDrawDan
 		//Mouse Stuff
 		private MouseState oldMouseState;
 		Rectangle mouseRectangle;
+		Vector2 mousePos;
+		Texture2D mouseTexture;
+
+
+		//GameState CurrentGameState = GameState.Back1;
 
 		public Game1 ()
 		{
 			ctx = new PrizeDrawContext (new GraphicsDeviceManager (this));
 			Content.RootDirectory = "Content";
 			splitscreen = new SplitScreen ();
-			main = new MainMenu ();
+			mainMenu = new MainMenu ();
 
 			//background = new BackgroundContent ();
-			this.IsMouseVisible = true;
+
 		}
+
 
 		/// <summary>
 		/// Allows the game to perform any initialization it needs to before starting to run.
@@ -56,6 +62,7 @@ namespace PrizeDrawDan
 		{
 			// TODO: Add your initialization logic here
 			ctx.Initialize();
+			IsMouseVisible = false;
 
 			base.Initialize ();
 		}
@@ -72,15 +79,20 @@ namespace PrizeDrawDan
 			splitscreen.LoadContent (ctx);
 
 			//background.LoadContent (Content);
-			main.LoadContent (Content);
+			mainMenu.LoadContent (Content);
 
 			back1 = Content.Load<Texture2D> ("Background1");
 			back2 = Content.Load<Texture2D> ("Background2");
 
-//			buttonTexture = Content.Load<Texture2D> ("Button");
-//			buttonHover = Content.Load<Texture2D> ("Button Hover");
-//			//buttonHClicked = Content.Load<Texture2D> ("Button Clicked");
-//			buttonDefault = buttonTexture;
+			buttonTexture = Content.Load<Texture2D> ("Button");
+			buttonHover = Content.Load<Texture2D> ("Button Hover");
+			buttonClicked = Content.Load<Texture2D> ("Button Clicked");
+			buttonDefault = buttonTexture;
+
+			mouseTexture = Content.Load<Texture2D> ("Mouse Pointer");
+
+//			bbtn = new bButton (Content.Load<Texture2D>("Button"), ctx.graphics.GraphicsDevice);
+//			bbtn.setPosition (new Vector2 (350, 300));
 
 		}
 
@@ -100,31 +112,45 @@ namespace PrizeDrawDan
 			#endif
 
 
+//			switch (CurrentGameState) {
+//			case GameState.Back1:
+//				if (bbtn.isClicked == true)
+//					CurrentGameState = GameState.Back2;
+//				bbtn.Update (mouse);
+//				break;
+//			}
+
 			// TODO: Add your update logic here
-//			MouseState mouseState;
-//			mouseState = Mouse.GetState();
-//
-//
-//			mouseRectangle = new Rectangle (mouseState.X, mouseState.Y, 1, 1);
-//			buttonRectangle = new Rectangle (100, 100, buttonHover.Width, buttonHover.Height);
-//
-//			if (mouseRectangle.Intersects(buttonRectangle)) {
-//				buttonDefault = buttonHover;
-//			} else {
-//				buttonDefault = buttonTexture;
-//			}
-//
-//			if(mouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released)
-//			{
-//				if (ctx.gameState == GameState.Back1) 
-//				{
-//					ctx.gameState = GameState.Back2;
-//				} else 
-//				{
-//					ctx.gameState = GameState.Back1;
-//				}
-//			}
-//			oldMouseState = mouseState;
+			MouseState mouseState = Mouse.GetState();
+
+			mousePos.X = mouseState.X;
+			mousePos.Y = mouseState.Y;
+
+			mouseRectangle = new Rectangle(mouseState.X, mouseState.Y, 1, 1);
+
+			buttonRectangle = new Rectangle (100, 100, buttonDefault.Width, buttonDefault.Height);
+
+
+			if (buttonRectangle.Contains(mouseRectangle)) {
+				buttonDefault = buttonHover;
+			} else {
+				buttonDefault = buttonTexture;
+			}
+				
+
+
+			if(mouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released 
+				&& buttonRectangle.Contains(mouseRectangle))
+			{
+				if (ctx.gameState == GameState.Back1) 
+				{
+					ctx.gameState = GameState.Back2;
+				} else 
+				{
+					ctx.gameState = GameState.Back1;
+				}
+			}
+			oldMouseState = mouseState;
             
 			base.Update (gameTime);
 		}
@@ -152,7 +178,6 @@ namespace PrizeDrawDan
 			case GameState.Back2:
 				spriteBatch.Draw (back2, backRectangle, Color.White);
 				break;
-
 			}
 			spriteBatch.End ();
 
@@ -160,8 +185,9 @@ namespace PrizeDrawDan
 			//Draw to the User Interface Side (Right)
 			ctx.graphics.GraphicsDevice.Viewport = splitscreen.Ui ();
 			spriteBatch.Begin ();
-			main.Draw (spriteBatch); 
-//			spriteBatch.Draw (buttonTexture, buttonRectangle, Color.White);
+			mainMenu.Draw (spriteBatch); 
+			spriteBatch.Draw (buttonDefault, buttonRectangle, Color.White);
+			spriteBatch.Draw (mouseTexture, mousePos, Color.White);
 			spriteBatch.End ();
 
 

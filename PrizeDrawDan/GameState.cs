@@ -14,5 +14,6 @@ namespace PrizeDrawDan
 		Back1,
 		Back2
 	}
+		
 }
 

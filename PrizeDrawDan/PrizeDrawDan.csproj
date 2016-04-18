@@ -75,6 +75,7 @@
     <Compile Include="MainMenu.cs" />
     <Compile Include="BackgroundContent.cs" />
     <Compile Include="GameState.cs" />
+    <Compile Include="bButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -111,6 +112,9 @@
     </Content>
     <Content Include="Content\bin\MacOSX\Button Hover.xnb">
       <Link>Content\Button Hover.xnb</Link>
+    </Content>
+    <Content Include="Content\bin\MacOSX\Mouse Pointer.xnb">
+      <Link>Content\Mouse Pointer.xnb</Link>
     </Content>
   </ItemGroup>
 </Project>
