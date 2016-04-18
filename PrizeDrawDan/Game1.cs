@@ -17,17 +17,23 @@ namespace PrizeDrawDan
 		PrizeDrawContext ctx;
 		SplitScreen splitscreen;
 		MainMenu main;
-		//BackgroundContent background;
+
+//		//Button Test
+//		Rectangle buttonRectangle;
+//		Texture2D buttonDefault;
+//		Texture2D buttonHover;
+//		Texture2D buttonTexture;
+//		//Texture2D buttonHClicked;
+
 
 		//Background stuff
 		Rectangle backRectangle;
 		Texture2D back1;
 		Texture2D back2;
-		Color colour;
 
 		//Mouse Stuff
-		private MouseState oldState;
-
+		private MouseState oldMouseState;
+		Rectangle mouseRectangle;
 
 		public Game1 ()
 		{
@@ -35,10 +41,9 @@ namespace PrizeDrawDan
 			Content.RootDirectory = "Content";
 			splitscreen = new SplitScreen ();
 			main = new MainMenu ();
-			//background = new BackgroundContent ();
-			colour = new Color(255, 255, 255, 255);
-			this.IsMouseVisible = true;
 
+			//background = new BackgroundContent ();
+			this.IsMouseVisible = true;
 		}
 
 		/// <summary>
@@ -62,16 +67,23 @@ namespace PrizeDrawDan
 		{
 			// Create a new SpriteBatch, which can be used to draw textures.
 			spriteBatch = new SpriteBatch(GraphicsDevice);
+
 			//TODO: use this.Content to load your game content here 
 			splitscreen.LoadContent (ctx);
+
 			//background.LoadContent (Content);
 			main.LoadContent (Content);
 
 			back1 = Content.Load<Texture2D> ("Background1");
 			back2 = Content.Load<Texture2D> ("Background2");
 
+//			buttonTexture = Content.Load<Texture2D> ("Button");
+//			buttonHover = Content.Load<Texture2D> ("Button Hover");
+//			//buttonHClicked = Content.Load<Texture2D> ("Button Clicked");
+//			buttonDefault = buttonTexture;
 
 		}
+
 
 		/// <summary>
 		/// Allows the game to run logic such as updating the world,
@@ -86,19 +98,33 @@ namespace PrizeDrawDan
 			if (GamePad.GetState (PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState ().IsKeyDown (Keys.Escape))
 				Exit ();
 			#endif
+
+
 			// TODO: Add your update logic here
-			MouseState newState = Mouse.GetState();
-			if(newState.LeftButton == ButtonState.Pressed && oldState.LeftButton == ButtonState.Released)
-			{
-				if (ctx.gameState == GameState.Back1) 
-				{
-					ctx.gameState = GameState.Back2;
-				} else 
-				{
-					ctx.gameState = GameState.Back1;
-				}
-			}
-			oldState = newState;
+//			MouseState mouseState;
+//			mouseState = Mouse.GetState();
+//
+//
+//			mouseRectangle = new Rectangle (mouseState.X, mouseState.Y, 1, 1);
+//			buttonRectangle = new Rectangle (100, 100, buttonHover.Width, buttonHover.Height);
+//
+//			if (mouseRectangle.Intersects(buttonRectangle)) {
+//				buttonDefault = buttonHover;
+//			} else {
+//				buttonDefault = buttonTexture;
+//			}
+//
+//			if(mouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released)
+//			{
+//				if (ctx.gameState == GameState.Back1) 
+//				{
+//					ctx.gameState = GameState.Back2;
+//				} else 
+//				{
+//					ctx.gameState = GameState.Back1;
+//				}
+//			}
+//			oldMouseState = mouseState;
             
 			base.Update (gameTime);
 		}
@@ -114,16 +140,17 @@ namespace PrizeDrawDan
             
 
 			//TODO: Add your drawing code here
+		
 
 			//Draw to the Game Window Side (Left)
 			ctx.graphics.GraphicsDevice.Viewport = splitscreen.Game();
 			spriteBatch.Begin ();
 			switch (ctx.gameState){
 			case GameState.Back1:
-				spriteBatch.Draw (back1, backRectangle, colour);
+				spriteBatch.Draw (back1, backRectangle, Color.White);
 				break;
 			case GameState.Back2:
-				spriteBatch.Draw (back2, backRectangle, colour);
+				spriteBatch.Draw (back2, backRectangle, Color.White);
 				break;
 
 			}
@@ -134,6 +161,7 @@ namespace PrizeDrawDan
 			ctx.graphics.GraphicsDevice.Viewport = splitscreen.Ui ();
 			spriteBatch.Begin ();
 			main.Draw (spriteBatch); 
+//			spriteBatch.Draw (buttonTexture, buttonRectangle, Color.White);
 			spriteBatch.End ();
 
 

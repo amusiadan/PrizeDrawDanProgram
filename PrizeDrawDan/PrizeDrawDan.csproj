@@ -106,5 +106,11 @@
     <Content Include="Content\bin\MacOSX\BackgroundOverlay.xnb">
       <Link>Content\BackgroundOverlay.xnb</Link>
     </Content>
+    <Content Include="Content\bin\MacOSX\Button Clicked.xnb">
+      <Link>Content\Button Clicked.xnb</Link>
+    </Content>
+    <Content Include="Content\bin\MacOSX\Button Hover.xnb">
+      <Link>Content\Button Hover.xnb</Link>
+    </Content>
   </ItemGroup>
 </Project>

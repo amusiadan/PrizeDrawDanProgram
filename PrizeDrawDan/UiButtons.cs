@@ -20,6 +20,7 @@ namespace PrizeDrawDan
 		Color colour = new Color (255, 255, 255, 255);
 
 
+
 		//Button Name and Id Getter
 		public UiButtons(string id, string assetName){
 			this.id = id;
