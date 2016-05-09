@@ -75,6 +75,7 @@
     <Compile Include="Buttons.cs" />
     <Compile Include="Backgrounds.cs" />
     <Compile Include="MouseControl.cs" />
+    <Compile Include="Timer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />

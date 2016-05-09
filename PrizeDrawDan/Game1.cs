@@ -8,30 +8,19 @@ using Microsoft.Xna.Framework.Content;
 
 namespace PrizeDrawDan
 {
-	/// <summary>
-	/// This is the main type for your game.
-	/// </summary>
 	public class Game1 : Game
 	{
+		//Game Classes
 		SpriteBatch spriteBatch;
 		PrizeDrawContext ctx;
 		SplitScreen splitscreen;
 		Buttons buttons;
 		MouseControl mouse;
-
+		Backgrounds background;
+		Timer timer;
 
 		//Background Stuff
-		Rectangle backRectangle;
-		Texture2D back1;
-		Texture2D back2;
-
-
-		//Timer
-		SpriteFont timerFont;
-		Vector2 timerPos;
-		string date;
-
-		//GameState CurrentGameState = GameState.Back1;
+		public Rectangle backRectangle;
 
 		public Game1 ()
 		{
@@ -40,12 +29,14 @@ namespace PrizeDrawDan
 			splitscreen = new SplitScreen ();
 			buttons = new Buttons ();
 			mouse = new MouseControl ();
+			background = new Backgrounds ();
+			timer = new Timer ();
 		}
 
 
 		protected override void Initialize ()
 		{
-			// TODO: Add your initialization logic here
+			//PrizeDrawContext Initialize
 			ctx.Initialize();
 			IsMouseVisible = false;
 
@@ -57,18 +48,12 @@ namespace PrizeDrawDan
 			// Create a new SpriteBatch, which can be used to draw textures.
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 
-			//TODO: use this.Content to load your game content here 
+			//Load Game Content
 			splitscreen.LoadContent (ctx);
 			buttons.LoadContent (Content);
 			mouse.LoadContent (Content);
-
-			//Background Content
-			back1 = Content.Load<Texture2D> ("Background1");
-			back2 = Content.Load<Texture2D> ("Background2");
-
-			//Timer Content
-			timerFont = Content.Load<SpriteFont> ("Timer Font");
-
+			background.LoadContent (Content);
+			timer.LoadContent (Content);
 		}
 
 
@@ -80,13 +65,32 @@ namespace PrizeDrawDan
 				Exit ();
 			#endif
 
-			// TODO: Add your update logic here      
+			//Update logic   
 			buttons.Update();
 			mouse.Update ();
+			timer.Update ();
 
-			//timer update
-			date = DateTime.Now.ToString ("F");
+			//Button Over Logic
+			if (buttons.MMNButtonPos.Contains (mouse.mouseRectangle)) {
+				buttons.MMNButtonDefault = buttons.MMNButtonHover; 
+			} else { buttons.MMNButtonDefault = buttons.MMNButton; }
 
+			if (buttons.CountdownButtonPos.Contains (mouse.mouseRectangle)) {
+				buttons.CountdownButtonDefault = buttons.CountdownButtonHover;
+			} else { buttons.CountdownButtonDefault = buttons.CountdownButton; }
+
+			if (buttons.RedrawButtonPos.Contains (mouse.mouseRectangle)) {
+				buttons.RedrawButtonDefault = buttons.RedrawButtonHover;
+			} else { buttons.RedrawButtonDefault = buttons.RedrawButton; }
+
+			//Mouse Click Logic
+			if(mouse.mouseState.LeftButton == ButtonState.Pressed && mouse.oldMouseState.LeftButton == ButtonState.Released 
+					&& buttons.MMNButtonPos.Contains (mouse.mouseRectangle))
+			{
+				if (ctx.gameState == GameState.Back1) 
+				{ ctx.gameState = GameState.Back2; } 
+				else { ctx.gameState = GameState.Back1; }
+			}
 
 			base.Update (gameTime);
 		}
@@ -94,26 +98,23 @@ namespace PrizeDrawDan
 
 		protected override void Draw (GameTime gameTime)
 		{
-			//TODO: Add your drawing code here
+			//Draw the game
 			backRectangle = new Rectangle (0, 0, ctx.graphics.GraphicsDevice.Viewport.Width, ctx.graphics.GraphicsDevice.Viewport.Width);
 			ctx.graphics.GraphicsDevice.Clear (Color.Black);
-			timerPos = new Vector2 (20, 20);
-		
 
 			//Draw to the Game Window Side (Left)
 			ctx.graphics.GraphicsDevice.Viewport = splitscreen.Game();
 			spriteBatch.Begin ();
 				switch (ctx.gameState) {
 				case GameState.Back1:
-					spriteBatch.Draw (back1, backRectangle, Color.White);
+					spriteBatch.Draw (background.back1, backRectangle, Color.White);
 					break;
 				case GameState.Back2:
-					spriteBatch.Draw (back2, backRectangle, Color.White);
+				spriteBatch.Draw (background.back2, backRectangle, Color.White);
 					break;
 				}
-			spriteBatch.DrawString (timerFont, "Time: " + date, timerPos, Color.White);
+			timer.Draw (spriteBatch);
 			spriteBatch.End ();
-
 
 			//Draw to the User Interface Side (Right)
 			ctx.graphics.GraphicsDevice.Viewport = splitscreen.Ui ();

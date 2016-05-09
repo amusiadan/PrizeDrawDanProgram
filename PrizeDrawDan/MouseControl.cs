@@ -10,6 +10,7 @@ namespace PrizeDrawDan
 	{
 
 		//Mouse 
+		public MouseState mouseState;
 		public MouseState oldMouseState;
 		public Vector2 mousePos;
 		public int mousePosX;
@@ -17,7 +18,9 @@ namespace PrizeDrawDan
 		Texture2D mouseTexture;
 		public Rectangle mouseRectangle;
 
+
 		public void LoadContent (ContentManager content){
+
 			//Mouse Pointer
 			mouseTexture = content.Load<Texture2D> ("Mouse Pointer");
 			Mouse.SetPosition(500, 300);
@@ -26,14 +29,14 @@ namespace PrizeDrawDan
 
 		public void Update (){
 
+			//Mouse Position
 			mousePos = new Vector2 (mousePosX, mousePosY);
-
-			MouseState mouseState = Mouse.GetState();
-			mousePosX = mouseState.X;
-			mousePosY = mouseState.Y;
-
 			mouseRectangle = new Rectangle (mousePosX, mousePosY, 1, 1);
 
+			//Mouse State Updates
+			mouseState = Mouse.GetState();
+			mousePosX = mouseState.X;
+			mousePosY = mouseState.Y;
 			oldMouseState = mouseState;
 		}
 
