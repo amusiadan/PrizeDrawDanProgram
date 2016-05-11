@@ -12,10 +12,10 @@ namespace PrizeDrawDan
 		Viewport game;
 		Viewport ui;
 
-		public void LoadContent(PrizeDrawContext ctx){
+		public void LoadContent(GraphicSettings graphicSettings){
 
-			game = ctx.graphics.GraphicsDevice.Viewport;
-			ui = ctx.graphics.GraphicsDevice.Viewport;
+			game = graphicSettings.graphics.GraphicsDevice.Viewport;
+			ui = graphicSettings.graphics.GraphicsDevice.Viewport;
 			game.Width = game.Width / 2;
 			ui.Width = ui.Width / 2;
 			ui.X = game.Width;

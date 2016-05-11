@@ -7,14 +7,14 @@ using Microsoft.Xna.Framework.Input;
 
 namespace PrizeDrawDan
 {
-	public class PrizeDrawContext
+	public class GraphicSettings
 	{
 		public GraphicsDeviceManager graphics;
-		public GameState gameState = GameState.Back1;
+		public GameState gameState = GameState.STARTUP;
 
 
 
-		public PrizeDrawContext(GraphicsDeviceManager graphics){
+		public GraphicSettings (GraphicsDeviceManager graphics){
 			this.graphics = graphics;
 		}
 

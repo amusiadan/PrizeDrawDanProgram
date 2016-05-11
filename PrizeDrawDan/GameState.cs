@@ -11,9 +11,9 @@ namespace PrizeDrawDan
 {
 	public enum GameState 
 	{
-		Back1,
-		Back2
+		STARTUP,
+		MMN,
+		GENERIC
 	}
-		
 }
 

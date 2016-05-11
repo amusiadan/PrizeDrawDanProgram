@@ -63,22 +63,26 @@
     <Reference Include="OpenTK, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4">
       <HintPath>..\..\..\..\..\Library\Frameworks\MonoGame.framework\v3.0\Assemblies\MacOSX\OpenTK.dll</HintPath>
     </Reference>
+    <Reference Include="MonoGame.Extended">
+      <HintPath>..\packages\MonoGame.Extended.0.5.149\lib\MonoGame.Extended.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Game1.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PrizeDrawContext.cs" />
     <Compile Include="SplitScreen.cs" />
-    <Compile Include="UiButtons.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="Buttons.cs" />
     <Compile Include="Backgrounds.cs" />
     <Compile Include="MouseControl.cs" />
     <Compile Include="Timer.cs" />
+    <Compile Include="GraphicSettings.cs" />
+    <Compile Include="BarrelTime.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
@@ -86,47 +90,59 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <ItemGroup>
-    <Content Include="Content\bin\MacOSX\Background1.xnb">
-      <Link>Content\Background1.xnb</Link>
+    <Content Include="Content\bin\MacOSX\Backgrounds\Background1.xnb">
+      <Link>Content\Backgrounds\Background1.xnb</Link>
     </Content>
-    <Content Include="Content\bin\MacOSX\Background2.xnb">
-      <Link>Content\Background2.xnb</Link>
+    <Content Include="Content\bin\MacOSX\Backgrounds\Background2.xnb">
+      <Link>Content\Backgrounds\Background2.xnb</Link>
     </Content>
-    <Content Include="Content\bin\MacOSX\BackgroundOverlay.xnb">
-      <Link>Content\BackgroundOverlay.xnb</Link>
+    <Content Include="Content\bin\MacOSX\Backgrounds\BackgroundOverlay.xnb">
+      <Link>Content\Backgrounds\BackgroundOverlay.xnb</Link>
     </Content>
-    <Content Include="Content\bin\MacOSX\Mouse Pointer.xnb">
-      <Link>Content\Mouse Pointer.xnb</Link>
+    <Content Include="Content\bin\MacOSX\Mouse\Mouse Pointer.xnb">
+      <Link>Content\Mouse\Mouse Pointer.xnb</Link>
     </Content>
-    <Content Include="Content\bin\MacOSX\Timer Font.xnb">
-      <Link>Content\Timer Font.xnb</Link>
+    <Content Include="Content\bin\MacOSX\Fonts\Timer Font.xnb">
+      <Link>Content\Fonts\Timer Font.xnb</Link>
     </Content>
-    <Content Include="Content\bin\MacOSX\Countdown Button Down.xnb">
-      <Link>Content\Countdown Button Down.xnb</Link>
+    <Content Include="Content\bin\MacOSX\Buttons\Countdown Button Down.xnb">
+      <Link>Content\Buttons\Countdown Button Down.xnb</Link>
     </Content>
-    <Content Include="Content\bin\MacOSX\Countdown Button Hover.xnb">
-      <Link>Content\Countdown Button Hover.xnb</Link>
+    <Content Include="Content\bin\MacOSX\Buttons\Countdown Button Hover.xnb">
+      <Link>Content\Buttons\Countdown Button Hover.xnb</Link>
     </Content>
-    <Content Include="Content\bin\MacOSX\Countdown Button.xnb">
-      <Link>Content\Countdown Button.xnb</Link>
+    <Content Include="Content\bin\MacOSX\Buttons\Countdown Button.xnb">
+      <Link>Content\Buttons\Countdown Button.xnb</Link>
     </Content>
-    <Content Include="Content\bin\MacOSX\MMN Button Down.xnb">
-      <Link>Content\MMN Button Down.xnb</Link>
+    <Content Include="Content\bin\MacOSX\Buttons\MMN Button Down.xnb">
+      <Link>Content\Buttons\MMN Button Down.xnb</Link>
     </Content>
-    <Content Include="Content\bin\MacOSX\MMN Button Hover.xnb">
-      <Link>Content\MMN Button Hover.xnb</Link>
+    <Content Include="Content\bin\MacOSX\Buttons\MMN Button Hover.xnb">
+      <Link>Content\Buttons\MMN Button Hover.xnb</Link>
     </Content>
-    <Content Include="Content\bin\MacOSX\MMN Button.xnb">
-      <Link>Content\MMN Button.xnb</Link>
+    <Content Include="Content\bin\MacOSX\Buttons\MMN Button.xnb">
+      <Link>Content\Buttons\MMN Button.xnb</Link>
     </Content>
-    <Content Include="Content\bin\MacOSX\REDRAW Button Down.xnb">
-      <Link>Content\REDRAW Button Down.xnb</Link>
+    <Content Include="Content\bin\MacOSX\Buttons\REDRAW Button Down.xnb">
+      <Link>Content\Buttons\REDRAW Button Down.xnb</Link>
     </Content>
-    <Content Include="Content\bin\MacOSX\REDRAW Button Hover.xnb">
-      <Link>Content\REDRAW Button Hover.xnb</Link>
+    <Content Include="Content\bin\MacOSX\Buttons\REDRAW Button Hover.xnb">
+      <Link>Content\Buttons\REDRAW Button Hover.xnb</Link>
     </Content>
-    <Content Include="Content\bin\MacOSX\REDRAW Button.xnb">
-      <Link>Content\REDRAW Button.xnb</Link>
+    <Content Include="Content\bin\MacOSX\Buttons\REDRAW Button.xnb">
+      <Link>Content\Buttons\REDRAW Button.xnb</Link>
+    </Content>
+    <Content Include="Content\bin\MacOSX\Backgrounds\Startup.xnb">
+      <Link>Content\Backgrounds\Startup.xnb</Link>
+    </Content>
+    <Content Include="Content\bin\MacOSX\Buttons\Generic Draw Button Down.xnb">
+      <Link>Content\Buttons\Generic Draw Button Down.xnb</Link>
+    </Content>
+    <Content Include="Content\bin\MacOSX\Buttons\Generic Draw Button Hover.xnb">
+      <Link>Content\Buttons\Generic Draw Button Hover.xnb</Link>
+    </Content>
+    <Content Include="Content\bin\MacOSX\Buttons\Generic Draw Button.xnb">
+      <Link>Content\Buttons\Generic Draw Button.xnb</Link>
     </Content>
   </ItemGroup>
 </Project>
