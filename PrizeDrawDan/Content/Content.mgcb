@@ -194,12 +194,6 @@
 /processorParam:TextureFormat=Color
 /build:Buttons/REDRAW Button.png
 
-#begin Fonts/Timer Font.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:TextureFormat=Compressed
-/build:Fonts/Timer Font.spritefont
-
 #begin Mouse/Mouse Pointer.gif
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -223,4 +217,21 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Backgrounds/Startup.jpg
+
+#begin Fonts/Timer Font.fnt
+/importer:BitmapFontImporter
+/processor:BitmapFontProcessor
+/build:Fonts/Timer Font.fnt
+
+#begin Fonts/Timer Font_0.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Fonts/Timer Font_0.png
 

@@ -70,8 +70,7 @@ namespace PrizeDrawDan
 			mouse.Update ();
 			timer.Update ();
 			background.Update ();
-
-
+			 
 
 			//Button Over Logic
 			if (buttons.MMNButtonPos.Contains (mouse.mouseRectangle)) {
@@ -139,14 +138,19 @@ namespace PrizeDrawDan
 			//Timer Click Logic
 			if (mouse.mouseState.LeftButton == ButtonState.Pressed && buttons.CountdownButtonPos.Contains (mouse.mouseRectangle)) {
 				buttons.CountdownButtonDefault = buttons.CountdownButtonDown; 
-				timer.timerShow = true; buttons.RedrawButtonisClicked = false; buttons.CountdownButtonisClicked = true; background.overlayShow = true;} 
+				timer.timerShow = true; buttons.RedrawButtonisClicked = false; buttons.CountdownButtonisClicked = true; 
+				background.overlayShow = true; timer.isRunning = true;} 
 			if (buttons.CountdownButtonisClicked) { buttons.CountdownButtonDefault = buttons.CountdownButtonDown; }
 
+			//Counter starts seconds down
+			if (timer.isRunning == false) 
+			{ timer.start(200); } else { timer.checkTime(gameTime); }   
 
 			//Redraw Click Logic
 			if (mouse.mouseState.LeftButton == ButtonState.Pressed && buttons.RedrawButtonPos.Contains (mouse.mouseRectangle)) 
 			{ buttons.RedrawButtonDefault = buttons.RedrawButtonDown; 
-				timer.timerShow = false; buttons.RedrawButtonisClicked = true; buttons.CountdownButtonisClicked = false; background.overlayShow = false;} 
+				timer.timerShow = false; buttons.RedrawButtonisClicked = true; buttons.CountdownButtonisClicked = false; 
+				background.overlayShow = false; timer.isRunning = false;} 
 			if (buttons.RedrawButtonisClicked == true) { buttons.RedrawButtonDefault = buttons.RedrawButtonDown; } 
 
 
