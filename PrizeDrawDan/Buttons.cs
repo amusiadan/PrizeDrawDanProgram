@@ -8,12 +8,12 @@ namespace PrizeDrawDan
 {
 	public class Buttons
 	{
-
 		//Button Positions
 		public Rectangle MMNButtonPos;
 		public Rectangle GenericDrawButtonPos;
 		public Rectangle CountdownButtonPos;
 		public Rectangle RedrawButtonPos;
+
 
 
 		//Button Textures
@@ -39,6 +39,7 @@ namespace PrizeDrawDan
 		public bool GenericDrawButtonisClicked;
 		public bool CountdownButtonisClicked;
 		public bool RedrawButtonisClicked;
+		public bool CountdownButtonisDown;
 
 		public void LoadContent (ContentManager Content){
 
@@ -61,9 +62,10 @@ namespace PrizeDrawDan
 			GenericDrawButtonDefault = GenericDrawButton;
 			CountdownButtonDefault = CountdownButton;
 			RedrawButtonDefault = RedrawButton;
+
 		}
 
-		public void Update (){
+		public void Update (GameTime gameTime, MouseControl mouse, Buttons buttons, RedrawTimer redrawTimer, Backgrounds background, CountdownTimer countdownTimer){
 
 			//Button Rectangles
 			MMNButtonPos = new Rectangle (10, 300, MMNButtonDefault.Width, MMNButtonDefault.Height);
@@ -72,6 +74,46 @@ namespace PrizeDrawDan
 			RedrawButtonPos = new Rectangle (850, 580, RedrawButtonDefault.Width, RedrawButtonDefault.Height);
 
 
+			//Button Hover Logic
+			if (MMNButtonPos.Contains (mouse.mouseRectangle)) {
+				MMNButtonDefault = MMNButtonHover;  } else { MMNButtonDefault = MMNButton; }
+			
+			if (GenericDrawButtonPos.Contains (mouse.mouseRectangle)) {
+				GenericDrawButtonDefault = GenericDrawButtonHover; } else { GenericDrawButtonDefault = GenericDrawButton; }
+
+			if (CountdownButtonPos.Contains (mouse.mouseRectangle)) {
+			CountdownButtonDefault = CountdownButtonHover; } else { CountdownButtonDefault = CountdownButton; }
+
+			
+			if ( RedrawButtonPos.Contains (mouse.mouseRectangle)) {
+				RedrawButtonDefault = RedrawButtonHover;} else { RedrawButtonDefault = RedrawButton; }
+
+			//Countdown Button Logic
+			if (CountdownButtonisClicked == true) {
+				redrawTimer.timerShow = false;
+				CountdownButtonisClicked = true; 
+				redrawTimer.isRunning = true;
+				countdownTimer.timerShow = true;
+			}
+			if (buttons.CountdownButtonisClicked == false) {
+				buttons.CountdownButtonisClicked = false; 
+				countdownTimer.timerShow = false;
+				redrawTimer.isRunning = false;
+		}
+
+
+
+			//Redraw Button Logic
+			if (RedrawButtonisClicked == true) {
+				redrawTimer.timerShow = true;
+				background.overlayShow = true;
+				redrawTimer.isRunning = true;
+				countdownTimer.timerShow = false;}
+
+			if (RedrawButtonisClicked == false) {
+				redrawTimer.timerShow = false; 
+				background.overlayShow = false;
+				}
 		}
 
 

@@ -76,12 +76,12 @@
     <Compile Include="Buttons.cs" />
     <Compile Include="Backgrounds.cs" />
     <Compile Include="MouseControl.cs" />
-    <Compile Include="Timer.cs" />
     <Compile Include="GraphicSettings.cs" />
-    <Compile Include="BarrelTime.cs" />
-    <Compile Include="Content\bin\MacOSX\Fonts\Timer Font_0.xnb">
-      <Link>Content\Fonts\Timer Font_0.xnb</Link>
-    </Compile>
+    <Compile Include="CurrentState.cs" />
+    <Compile Include="RedrawTimer.cs" />
+    <Compile Include="CountdownTimer.cs" />
+    <Compile Include="TimeSettings.cs" />
+    <Compile Include="UIText.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -89,9 +89,6 @@
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
-    <MonoGameContentReference Include="Content\bin\MacOSX\Fonts\Timer Font.xnb">
-      <Link>Content\Fonts\Timer Font.xnb</Link>
-    </MonoGameContentReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
@@ -108,15 +105,6 @@
     <Content Include="Content\bin\MacOSX\Mouse\Mouse Pointer.xnb">
       <Link>Content\Mouse\Mouse Pointer.xnb</Link>
     </Content>
-    <Content Include="Content\bin\MacOSX\Buttons\Countdown Button Down.xnb">
-      <Link>Content\Buttons\Countdown Button Down.xnb</Link>
-    </Content>
-    <Content Include="Content\bin\MacOSX\Buttons\Countdown Button Hover.xnb">
-      <Link>Content\Buttons\Countdown Button Hover.xnb</Link>
-    </Content>
-    <Content Include="Content\bin\MacOSX\Buttons\Countdown Button.xnb">
-      <Link>Content\Buttons\Countdown Button.xnb</Link>
-    </Content>
     <Content Include="Content\bin\MacOSX\Buttons\MMN Button Down.xnb">
       <Link>Content\Buttons\MMN Button Down.xnb</Link>
     </Content>
@@ -125,15 +113,6 @@
     </Content>
     <Content Include="Content\bin\MacOSX\Buttons\MMN Button.xnb">
       <Link>Content\Buttons\MMN Button.xnb</Link>
-    </Content>
-    <Content Include="Content\bin\MacOSX\Buttons\REDRAW Button Down.xnb">
-      <Link>Content\Buttons\REDRAW Button Down.xnb</Link>
-    </Content>
-    <Content Include="Content\bin\MacOSX\Buttons\REDRAW Button Hover.xnb">
-      <Link>Content\Buttons\REDRAW Button Hover.xnb</Link>
-    </Content>
-    <Content Include="Content\bin\MacOSX\Buttons\REDRAW Button.xnb">
-      <Link>Content\Buttons\REDRAW Button.xnb</Link>
     </Content>
     <Content Include="Content\bin\MacOSX\Backgrounds\Startup.xnb">
       <Link>Content\Backgrounds\Startup.xnb</Link>
@@ -146,6 +125,39 @@
     </Content>
     <Content Include="Content\bin\MacOSX\Buttons\Generic Draw Button.xnb">
       <Link>Content\Buttons\Generic Draw Button.xnb</Link>
+    </Content>
+    <Content Include="Content\bin\MacOSX\Fonts\Timer Font_0.xnb">
+      <Link>Content\Fonts\Timer Font_0.xnb</Link>
+    </Content>
+    <Content Include="Content\bin\MacOSX\Fonts\Timer Font.xnb">
+      <Link>Content\Fonts\Timer Font.xnb</Link>
+    </Content>
+    <Content Include="Content\bin\MacOSX\Mouse\Mouse Pointer Clicked.xnb">
+      <Link>Content\Mouse\Mouse Pointer Clicked.xnb</Link>
+    </Content>
+    <Content Include="Content\bin\MacOSX\Buttons\Redraw Button.xnb">
+      <Link>Content\Buttons\Redraw Button.xnb</Link>
+    </Content>
+    <Content Include="Content\bin\MacOSX\Buttons\Redraw Button Hover.xnb">
+      <Link>Content\Buttons\Redraw Button Hover.xnb</Link>
+    </Content>
+    <Content Include="Content\bin\MacOSX\Buttons\Redraw Button Down.xnb">
+      <Link>Content\Buttons\Redraw Button Down.xnb</Link>
+    </Content>
+    <Content Include="Content\bin\MacOSX\Buttons\Countdown Button Hover.xnb">
+      <Link>Content\Buttons\Countdown Button Hover.xnb</Link>
+    </Content>
+    <Content Include="Content\bin\MacOSX\Buttons\Countdown Button Down.xnb">
+      <Link>Content\Buttons\Countdown Button Down.xnb</Link>
+    </Content>
+    <Content Include="Content\bin\MacOSX\Buttons\Countdown Button.xnb">
+      <Link>Content\Buttons\Countdown Button.xnb</Link>
+    </Content>
+    <Content Include="Content\bin\MacOSX\Other\Raindrop.xnb">
+      <Link>Content\Other\Raindrop.xnb</Link>
+    </Content>
+    <Content Include="Content\bin\MacOSX\Fonts\TextFont.xnb">
+      <Link>Content\Fonts\TextFont.xnb</Link>
     </Content>
   </ItemGroup>
   <ItemGroup>

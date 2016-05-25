@@ -4,14 +4,18 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using MonoGame.Extended.BitmapFonts;
 
+
 namespace PrizeDrawDan
 {
-	public class Timer
+	public class CountdownTimer
 	{
+		//GraphicSettings graphics;
+
 		//Timer
 		BitmapFont timerFont;
-		TimeSpan timeSpan = new TimeSpan(0, 0, 120);
 		Vector2 timerPos;
+		//Vector2 middlePoint;
+		TimeSpan timeSpan = new TimeSpan(0, 2, 0);
 		//string timerText;
 		Color timerColor;
 		float timer = 1;
@@ -43,7 +47,6 @@ namespace PrizeDrawDan
 		{ 
 			endTimer = seconds; 
 			isRunning = true; 
-			displayTimer = endTimer.ToString ();
 		} 
 
 		public Boolean checkTime(GameTime gameTime) 
@@ -54,7 +57,9 @@ namespace PrizeDrawDan
 				if (countTimerRef >= 1000.0f) 
 				{ 
 					endTimer = endTimer - 1; 
-					displayTimer  = endTimer.ToString(); 
+					int min = endTimer / 60;
+					int sec = endTimer % 60;
+					displayTimer = min + ":" + sec.ToString("##"); 
 					countTimerRef = 0; 
 					if (endTimer <= 0) 
 					{ 
@@ -80,28 +85,28 @@ namespace PrizeDrawDan
 			endTimer = 0; 
 		}   
 
-		public void LoadContent (ContentManager content){
+		public void LoadContent (ContentManager Content){
 
 			//Timer Content
-			timerFont = content.Load<BitmapFont> ("Timer Font");
+			timerFont = Content.Load<BitmapFont> ("Timer Font");
 		}
 
 
-		public void Update(){
+		public void Update(GameTime gameTime){
 
 			//Timer Update
-			//date = DateTime.Now.ToString ("t");
 			timer += (float)timeSpan.TotalSeconds;
 
-			timerPos = new Vector2 (260, 720/2);
-
+			timerPos = new Vector2 (1080/2 - 220, 720/2 - 200);
 
 			if (timerShow == true)
 			{ timerColor = Color.Black; }
 			else if (timerShow == false)
 			{ timerColor = Color.Transparent; }
 
-
+			//Counter starts seconds down
+			if (isRunning == false) 
+			{ start(121); } else { checkTime(gameTime); }   
 				
 		}
 

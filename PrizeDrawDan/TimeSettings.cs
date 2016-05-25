@@ -2,7 +2,7 @@
 
 namespace PrizeDrawDan
 {
-	public class BarrelTime
+	public class TimeSettings
 	{
 		int timeHour = 0;
 		int timeMinute = 0;
@@ -38,9 +38,9 @@ namespace PrizeDrawDan
 			}
 		}
 
-		internal BarrelTime(int Hour, int minute)
+		internal TimeSettings(int hour, int minute)
 		{
-			timeHour = Hour;
+			timeHour = hour;
 			timeMinute = minute;
 			if (timeHour > 24) timeHour = 24;
 			if (timeHour < 0) timeHour = 0;
@@ -55,14 +55,19 @@ namespace PrizeDrawDan
 			if (timeHour == 24) timeTotalSeconds -= 1;
 		}
 
-
-		///Seconds remaining to the barrel time
+		/// <summary>
+		/// Resturn the number of seconds remaining to this barrel time.
+		/// </summary>
+		/// <param name="time">Time to compare this barrel time to</param>
+		/// <returns></returns>
 		internal int timeRemaining(DateTime time)
 		{
 			//Convert time to seconds
 			int timeNowSeconds = time.Hour * 3600 + time.Minute * 60 + time.Second;
 			return timeTotalSeconds - timeNowSeconds;
 		}
+	}
 }
-}
+
+
 

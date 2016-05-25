@@ -22,6 +22,7 @@ namespace PrizeDrawDan
 
 
 		public void LoadContent (ContentManager Content){
+
 			//Background Content
 			backStartUp = Content.Load<Texture2D> ("Startup");
 			back1 = Content.Load<Texture2D> ("Background1");
@@ -31,7 +32,7 @@ namespace PrizeDrawDan
 
 		}
 
-		public void Update (){
+		public void Update (GraphicSettings graphicSettings){
 
 			overlayTransparentColor = new Color(60, 60, 60, 10);
 
@@ -39,6 +40,9 @@ namespace PrizeDrawDan
 			{ overlayColor = overlayTransparentColor; }
 			else if (overlayShow == false)
 			{ overlayColor = Color.Transparent; }
+
+			backRectangle = new Rectangle (0, 0, graphicSettings.graphics.GraphicsDevice.Viewport.Width, 
+				graphicSettings.graphics.GraphicsDevice.Viewport.Width);
 		}
 
 		public void Draw (SpriteBatch spriteBatch){

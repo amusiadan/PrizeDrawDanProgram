@@ -13,7 +13,7 @@ namespace PrizeDrawDan
 	{
 		STARTUP,
 		MMN,
-		GENERIC
+		GENERIC,
 	}
 }
 
